@@ -24,11 +24,12 @@ namespace APICatalogo.Controllers
         {
             return _context.Produtos.AsNoTracking().ToList();
         }
-        [HttpGet("{id}", Name = "ObterProduto")]
+        [HttpGet("{id:int:min(1)}", Name = "ObterProduto")]
         public ActionResult<Produto> Get(int id)
         {
             var produto = _context.Produtos.AsNoTracking().FirstOrDefault(p => p.ProdutoId == id);
             return produto == null ? NotFound() : produto;
+
         }
         [HttpPost]
         public ActionResult Post([FromBody] Produto produto)
